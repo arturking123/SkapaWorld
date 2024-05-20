@@ -1,3 +1,43 @@
+window.addEventListener("message", ({ data }) => {
+  const pdData = data?.playdeck;
+  if (!pdData) return;
+
+  console.log("[game 🎾 :]", pdData.method, pdData.value);
+
+  if (pdData.method === "isOpen") {
+    window.playdeckIsOpen = pdData.value;
+  }
+
+  if (pdData.method === "getUser") {
+    window.playdeckUser = pdData.value;
+  }
+
+  if (pdData.method === "getUserLocale") {
+    window.playdeckUserLocale = pdData.value;
+  }
+
+  if (pdData.method === "getScore") window.playdeckScore = pdData.value;
+
+  if (pdData.method === "getData") {
+    window.playdeckData = pdData.value;
+  }
+
+  if (pdData.method === "play") {
+    if (runner.crashed && runner.gameOverPanel) {
+      runner.restart();
+    } else {
+      var e = new KeyboardEvent("keydown", { keyCode: 32, which: 32 });
+      document.dispatchEvent(e);
+    }
+  }
+
+  if (pdData.method === "pause") {
+    runner.stop();
+  }
+});
+
+const parent = window.parent.window;
+
 const loading = (value) =>
     parent.postMessage({ playdeck: { method: "loading", value: value } }, "*");
   
