@@ -2,7 +2,7 @@ window.addEventListener("message", ({ data }) => {
   const pdData = data?.playdeck;
   if (!pdData) return;
 
-  console.log("[game 🎾 :]", pdData.method, pdData.value);
+//   console.log("[game 🎾 :]", pdData.method, pdData.value);
 
   if (pdData.method === "isOpen") {
     window.playdeckIsOpen = pdData.value;
@@ -20,19 +20,6 @@ window.addEventListener("message", ({ data }) => {
 
   if (pdData.method === "getData") {
     window.playdeckData = pdData.value;
-  }
-
-  if (pdData.method === "play") {
-    if (runner.crashed && runner.gameOverPanel) {
-      runner.restart();
-    } else {
-      var e = new KeyboardEvent("keydown", { keyCode: 32, which: 32 });
-      document.dispatchEvent(e);
-    }
-  }
-
-  if (pdData.method === "pause") {
-    runner.stop();
   }
 });
 
