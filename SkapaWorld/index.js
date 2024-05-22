@@ -1,5 +1,5 @@
-var canvas = document.getElementById('unity-canvas'),
-    context = canvas.getContext('2d');
+const canvas = document.getElementById('unity-canvas');
+const context = canvas.getContext('2d');
 context.rotate(90 * (Math.PI / 180));
 
 window.addEventListener("message", ({ data }) => {
